@@ -1,45 +1,38 @@
-import java.util.LinkedList;
+interface PalindromeStrategy {
+    boolean check(String input);
+}
 
 /**
- * =====================================================================
- * MAIN CLASS - UseCase9PalindromeCheckerApp
- * =====================================================================
- * Use Case 9: Recursive Palindrome Checker
- * Description: This class validates a palindrome using recursion.
- * @author Developer
- * @version 9.0
+ * Provides a Stack based implementation of PalindromeStrategy.
+ * Uses LIFO behavior to reverse characters for comparison.
  */
-public class PalindromeCheckerApp {
+class StackStrategy implements PalindromeStrategy {
 
-    /**
-     * Application entry point for UC9.
-     * @param args Command-line arguments
-     */
-    public static void main(String[] args) {
-        String input = "madam";
-        System.out.println("Input : " + input);
+    @Override
+    public boolean check(String input) {
+        // Create a stack to store characters
+        java.util.Stack<Character> stack = new java.util.Stack<>();
 
-        boolean isPalindrome = check(input, 0, input.length() - 1);
-        System.out.println("Is Palindrome? : " + isPalindrome);
+        // Push each character of the input string onto the stack
+        for (char c : input.toCharArray()) {
+            stack.push(c);
+        }
+
+        // Compare characters by popping from the stack
+        for (char c : input.toCharArray()) {
+            if (c != stack.pop()) {
+                return false;
+            }
+        }
+        return true;
     }
+}
 
-    /**
-     * Recursively checks whether a string is a palindrome.
-     * @param s     Input string
-     * @param start Starting index
-     * @param end   Ending index
-     * @return true if palindrome, otherwise false
-     */
-    private static boolean check(String s, int start, int end) {
-        // Base case: pointers meet or cross
-        if (start >= end) {
-            return true;
-        }
-        // Check characters at current pointers
-        if (s.charAt(start) != s.charAt(end)) {
-            return false;
-        }
-        // Recursive step
-        return check(s, start + 1, end - 1);
+public class PalindromeCheckerApp {
+    public static void main(String[] args) {
+        // Example of injecting the strategy at runtime
+        PalindromeStrategy strategy = new StackStrategy();
+        String input = "level";
+        System.out.println("Result: " + strategy.check(input));
     }
 }
