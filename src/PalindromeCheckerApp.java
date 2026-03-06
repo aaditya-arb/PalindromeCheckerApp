@@ -1,73 +1,57 @@
-/**
- * =========================================================
- * MAIN CLASS - UseCase6PalindromeCheckerApp
- * =========================================================
- *
- * Use Case 6: Queue + Stack Fairness Check
- *
- * Description:
- * This class demonstrates palindrome validation using
- * two different data structures:
- *
- * - Queue (FIFO - First In First Out)
- * - Stack (LIFO - Last In First Out)
- *
- * Characters are inserted into both structures and then
- * compared by removing from the front of the queue and
- * the top of the stack.
- *
- * If all characters match, the input string is confirmed
- * as a palindrome.
- *
- * This use case helps understand how FIFO and LIFO
- * behaviors can be combined for symmetric comparison.
- *
- * @author Developer
- * @version 6.0
- */
-
 import java.util.LinkedList;
-import java.util.Queue;
-import java.util.Stack;
 
+/**
+ * =====================================================================
+ * MAIN CLASS - UseCase8PalindromeCheckerApp
+ * =====================================================================
+ * * Use Case 8: Linked List Based Palindrome Checker
+ * * Description:
+ * This class checks whether a string is a palindrome
+ * using a LinkedList.
+ * * Characters are added to the list and then compared
+ * by removing elements from both ends:
+ * * - removeFirst()
+ * - removeLast()
+ * * This demonstrates how LinkedList supports
+ * double-ended operations for symmetric validation.
+ * * @author Developer
+ * @version 8.0
+ */
 public class PalindromeCheckerApp {
 
     /**
-     * Application entry point for UC6.
-     *
-     * @param args Command-line arguments
+     * Application entry point for UC8.
+     * * @param args Command-line arguments
      */
     public static void main(String[] args) {
 
-        // Declare and initialize the input string.
+        // Define the input string
         String input = "level";
 
-        // Create Queue and Stack.
-        Queue<Character> queue = new LinkedList<>();
-        Stack<Character> stack = new Stack<>();
+        // Create a LinkedList to store characters
+        LinkedList<Character> list = new LinkedList<>();
 
-        // Insert characters into both Queue and Stack.
+        // Add each character to the linked list
         for (char c : input.toCharArray()) {
-            queue.offer(c);   // FIFO
-            stack.push(c);    // LIFO
+            list.add(c);
         }
 
-        // Assume palindrome initially.
+        // Flag to track palindrome state
         boolean isPalindrome = true;
 
-        // Compare by removing from Queue and Stack.
-        while (!queue.isEmpty() && !stack.isEmpty()) {
-            if (queue.poll() != stack.pop()) {
+        // Compare until only one or zero elements remain
+        while (list.size() > 1) {
+            // Remove from both ends and compare
+            char first = list.removeFirst();
+            char last = list.removeLast();
+
+            if (first != last) {
                 isPalindrome = false;
                 break;
             }
         }
 
-        // Display the result.
-        if (isPalindrome) {
-            System.out.println("The string is a palindrome.");
-        } else {
-            System.out.println("The string is NOT a palindrome.");
-        }
+        // Output the result
+        System.out.println("Is \"" + input + "\" a palindrome? " + isPalindrome);
     }
 }
