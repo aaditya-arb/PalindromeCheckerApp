@@ -1,39 +1,34 @@
 /**
- * =====================================================
- * MAIN CLASS - UseCase2PalindromeCheckerApp
- * =====================================================
- *
- * Use Case 2: Hardcoded Palindrome Validation
- *
- * Description:
- * This class demonstrates basic palindrome validation
- * using a hardcoded string value.
+ * Use Case 9: Recursive Palindrome Checker
+ * @author Developer
+ * @version 9.0
  */
-
 public class PalindromeCheckerApp {
 
-    /**
-     * Application entry point for UC2.
-     * @param args Command-line arguments
-     */
     public static void main(String[] args) {
+        String input = "madam";
+        System.out.println("Input : " + input);
+        boolean isPalindrome = check(input, 0, input.length() - 1);
+        System.out.println("Is Palindrome? : " + isPalindrome);
+    }
 
-        String word = "madam";
-
-        boolean isPalindrome = true;
-
-        for (int i = 0; i < word.length() / 2; i++) {
-
-            if (word.charAt(i) != word.charAt(word.length() - 1 - i)) {
-                isPalindrome = false;
-                break;
-            }
+    /**
+     * Recursively checks whether a string is palindrome.
+     * @param s Input string
+     * @param start Starting index
+     * @param end Ending index
+     * @return true if palindrome, otherwise false
+     */
+    private static boolean check(String s, int start, int end) {
+        // Base case: pointers meet or cross
+        if (start >= end) {
+            return true;
         }
-
-        if (isPalindrome) {
-            System.out.println(word + " is a palindrome.");
-        } else {
-            System.out.println(word + " is not a palindrome.");
+        // Mismatch found
+        if (s.charAt(start) != s.charAt(end)) {
+            return false;
         }
+        // Recursive call moving inward
+        return check(s, start + 1, end - 1);
     }
 }
