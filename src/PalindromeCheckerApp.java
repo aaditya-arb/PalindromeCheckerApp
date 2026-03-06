@@ -1,39 +1,38 @@
+interface PalindromeStrategy {
+    boolean check(String input);
+}
+
 /**
- * =====================================================
- * MAIN CLASS - UseCase2PalindromeCheckerApp
- * =====================================================
- *
- * Use Case 2: Hardcoded Palindrome Validation
- *
- * Description:
- * This class demonstrates basic palindrome validation
- * using a hardcoded string value.
+ * Provides a Stack based implementation of PalindromeStrategy.
+ * Uses LIFO behavior to reverse characters for comparison.
  */
+class StackStrategy implements PalindromeStrategy {
 
-public class PalindromeCheckerApp {
+    @Override
+    public boolean check(String input) {
+        // Create a stack to store characters
+        java.util.Stack<Character> stack = new java.util.Stack<>();
 
-    /**
-     * Application entry point for UC2.
-     * @param args Command-line arguments
-     */
-    public static void main(String[] args) {
+        // Push each character of the input string onto the stack
+        for (char c : input.toCharArray()) {
+            stack.push(c);
+        }
 
-        String word = "madam";
-
-        boolean isPalindrome = true;
-
-        for (int i = 0; i < word.length() / 2; i++) {
-
-            if (word.charAt(i) != word.charAt(word.length() - 1 - i)) {
-                isPalindrome = false;
-                break;
+        // Compare characters by popping from the stack
+        for (char c : input.toCharArray()) {
+            if (c != stack.pop()) {
+                return false;
             }
         }
+        return true;
+    }
+}
 
-        if (isPalindrome) {
-            System.out.println(word + " is a palindrome.");
-        } else {
-            System.out.println(word + " is not a palindrome.");
-        }
+public class PalindromeCheckerApp {
+    public static void main(String[] args) {
+        // Example of injecting the strategy at runtime
+        PalindromeStrategy strategy = new StackStrategy();
+        String input = "level";
+        System.out.println("Result: " + strategy.check(input));
     }
 }
