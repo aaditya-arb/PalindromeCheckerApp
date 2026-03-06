@@ -1,3 +1,7 @@
+interface PalindromeStrategy {
+    boolean check(String input);
+}
+
 /**
  * Use Case 9: Recursive Palindrome Checker
  * @author Developer
