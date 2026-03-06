@@ -3,36 +3,36 @@ interface PalindromeStrategy {
 }
 
 /**
- * Provides a Stack based implementation of PalindromeStrategy.
- * Uses LIFO behavior to reverse characters for comparison.
+ * Use Case 9: Recursive Palindrome Checker
+ * @author Developer
+ * @version 9.0
  */
-class StackStrategy implements PalindromeStrategy {
-
-    @Override
-    public boolean check(String input) {
-        // Create a stack to store characters
-        java.util.Stack<Character> stack = new java.util.Stack<>();
-
-        // Push each character of the input string onto the stack
-        for (char c : input.toCharArray()) {
-            stack.push(c);
-        }
-
-        // Compare characters by popping from the stack
-        for (char c : input.toCharArray()) {
-            if (c != stack.pop()) {
-                return false;
-            }
-        }
-        return true;
-    }
-}
-
 public class PalindromeCheckerApp {
+
     public static void main(String[] args) {
-        // Example of injecting the strategy at runtime
-        PalindromeStrategy strategy = new StackStrategy();
-        String input = "level";
-        System.out.println("Result: " + strategy.check(input));
+        String input = "madam";
+        System.out.println("Input : " + input);
+        boolean isPalindrome = check(input, 0, input.length() - 1);
+        System.out.println("Is Palindrome? : " + isPalindrome);
+    }
+
+    /**
+     * Recursively checks whether a string is palindrome.
+     * @param s Input string
+     * @param start Starting index
+     * @param end Ending index
+     * @return true if palindrome, otherwise false
+     */
+    private static boolean check(String s, int start, int end) {
+        // Base case: pointers meet or cross
+        if (start >= end) {
+            return true;
+        }
+        // Mismatch found
+        if (s.charAt(start) != s.charAt(end)) {
+            return false;
+        }
+        // Recursive call moving inward
+        return check(s, start + 1, end - 1);
     }
 }
