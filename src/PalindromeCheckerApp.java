@@ -27,9 +27,7 @@ public class PalindromeCheckerApp {
         String input = "madam";
         System.out.println("Input : " + input);
 
-        // Start recursion with the first (0) and last index
         boolean isPalindrome = check(input, 0, input.length() - 1);
-
         System.out.println("Is Palindrome? : " + isPalindrome);
     }
 
@@ -41,17 +39,15 @@ public class PalindromeCheckerApp {
      * @return true if palindrome, otherwise false
      */
     private static boolean check(String s, int start, int end) {
-        // Base case: if pointers meet or cross, all characters matched
+        // Base case: if pointers meet or cross, all matched
         if (start >= end) {
             return true;
         }
-
-        // Check if characters at current positions match
+        // If characters mismatch, it's not a palindrome
         if (s.charAt(start) != s.charAt(end)) {
             return false;
         }
-
-        // Recursive call: move inward
+        // Recursive step: move inward
         return check(s, start + 1, end - 1);
     }
 }
