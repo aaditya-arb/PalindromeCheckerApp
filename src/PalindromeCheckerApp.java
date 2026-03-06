@@ -1,3 +1,5 @@
+import java.util.LinkedList;
+
 /**
  * ===============================================================
  * MAIN CLASS - UseCase7PalindromeCheckerApp
